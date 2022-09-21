@@ -1,0 +1,19 @@
+{
+    "name": "default",
+    "type": "sqlite",
+    "host": "localhost",
+    "port": "5500",
+    "database": "./src/common/database/database.sqlite",
+    "migrations": [
+        "./src/common/database/migration/**.ts"
+    ],
+    "cli": {
+        "entitiesDir": "./src/useCases/*/models",
+        "migrationsDir": "./src/database/migration"
+    },
+    "entities": [
+        "./src/useCases/*/models/*.ts"
+    ],
+    "logging": true,
+    "synchronize": true
+}
