@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
-import { SaveAdRequestDTO } from '../../../useCases/Ads/dtos/SaveAdRequestDTO';
+import { SaveAdRequestDTO } from '../../../useCases/Ads/dtos/SaveAdRequestDTO copy';
+import { ViewAdDTO } from '../../../useCases/Ads/dtos/ViewAdDTO';
+import Ad from '../../../useCases/Ads/models/Ad';
 import AdsRepository from '../../../useCases/Ads/repositories/AdsRepository';
 import SaveAdService from '../../../useCases/Ads/services/SaveAdService';
 import SearchDiscordService from '../../../useCases/Ads/services/SearchDiscordService';
@@ -7,7 +9,7 @@ import GamesRepository from '../../../useCases/Games/repositories/GamesRepositor
 import ListAdsService from '../../../useCases/Games/services/ListAdsService';
 
 class AdsController {
-    public async save(request: Request,response: Response){
+    public async save(request: Request, response: Response<{ad: Ad}>){
         const newAd: SaveAdRequestDTO = request.body;
 
         const adsRepository = new AdsRepository();
@@ -19,7 +21,7 @@ class AdsController {
         return response.status(201).json({ad});
     }
 
-    public async getByGame(request: Request, response: Response) {
+    public async getByGame(request: Request, response: Response<{ads: ViewAdDTO[]}>) {
         const { gameId } = request.params;
 
         const gamesRepository = new GamesRepository();
@@ -30,13 +32,13 @@ class AdsController {
         return response.json({ads});
     }
 
-    public async getDiscordByAd(request:Request,response:Response) {
+    public async getDiscordByAd(request: Request, response: Response<{discord: string}>) {
         const { adId } = request.params;
 
         const adsRepository = new AdsRepository();
         const searchDiscord = new SearchDiscordService(adsRepository);
 
-        const discord = await searchDiscord.execute(adId);
+        const { discord } = await searchDiscord.execute(adId);
 
         return response.json({discord});
     }

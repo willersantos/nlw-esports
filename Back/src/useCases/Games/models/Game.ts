@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import Ad from '../../Ads/models/Ad';
 
-@Entity('game')
+@Entity('gamesTb')
 class Game{
     @PrimaryGeneratedColumn('uuid')
     id: string;

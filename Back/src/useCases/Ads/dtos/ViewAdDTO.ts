@@ -1,5 +1,6 @@
 export interface ViewAdDTO
 {
+    id: string;
     name: string;
     yearsPlaying: number;
     discord: string;
@@ -7,4 +8,6 @@ export interface ViewAdDTO
     hourStart: number;
     hourEnd: number;
     useVoiceChannel: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
